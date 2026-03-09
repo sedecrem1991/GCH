@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El dilema del propósito en Colombia</title>
+  <meta name="description" content="Ensayo multimedia sobre empresas con propósito en Colombia: ¿motor real de cambio o fachada reputacional?" />
+
+  <style>
+    :root{
+      --bg:#f5f3ef;
+      --paper:#fbfaf8;
+      --text:#242424;
+      --muted:#6f6a63;
+      --line:#d9d3cc;
+      --accent:#0f3d5e;
+      --accent-2:#8c2f39;
+      --accent-3:#caa46a;
+      --dark:#151515;
+      --max:1200px;
+      --reading:720px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.75;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    a{
+      color:var(--accent);
+      text-decoration:none;
+      border-bottom:1px solid rgba(15,61,94,.25);
+      transition:.2s ease;
+    }
+    a:hover{
+      color:var(--accent-2);
+      border-bottom-color:rgba(140,47,57,.4);
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter: blur(10px);
+      background:rgba(245,243,239,.9);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:1.2rem;
+      font-weight:700;
+      letter-spacing:.03em;
+      color:#111;
+      white-space:nowrap;
+    }
+
+    .section-label{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .progress-wrap{
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:100%;
+      height:2px;
+      background:transparent;
+    }
+
+    .progress-bar{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    }
+
+    .hero{
+      position:relative;
+      min-height:88vh;
+      display:flex;
+      align-items:flex-end;
+      background:
+        linear-gradient(to top, rgba(12,12,12,.78) 0%, rgba(12,12,12,.42) 35%, rgba(12,12,12,.1) 60%, rgba(12,12,12,.08) 100%),
+        url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color:#fff;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, rgba(15,61,94,.24), rgba(140,47,57,.12));
+      mix-blend-mode:screen;
+      pointer-events:none;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:var(--max);
+      margin:0 auto;
+      width:100%;
+      padding:90px 22px 60px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#f2dfc0;
+      margin-bottom:18px;
+    }
+
+    .headline{
+      max-width:900px;
+      font-size:clamp(2.3rem, 6vw, 5rem);
+      line-height:1.03;
+      margin:0 0 18px 0;
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+
+    .deck{
+      max-width:780px;
+      font-size:clamp(1.1rem, 2vw, 1.7rem);
+      line-height:1.5;
+      color:rgba(255,255,255,.92);
+      margin:0 0 26px 0;
+    }
+
+    .byline{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.9rem;
+      color:rgba(255,255,255,.82);
+    }
+
+    .meta-dot::before{
+      content:"•";
+      margin-right:10px;
+      opacity:.5;
+    }
+
+    .lead-card{
+      max-width:940px;
+      margin:-55px auto 70px;
+      background:var(--paper);
+      border:1px solid rgba(217,211,204,.8);
+      box-shadow:var(--shadow);
+      position:relative;
+      z-index:3;
+      padding:28px 28px;
+    }
+
+    .lead-grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:28px;
+    }
+
+    .lead-card p{
+      margin:0;
+      font-size:1.08rem;
+      color:#322f2b;
+    }
+
+    .quick-facts{
+      border-left:1px solid var(--line);
+      padding-left:22px;
+    }
+
+    .quick-facts h3{
+      margin:0 0 14px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+
+    .fact{
+      margin:0 0 14px 0;
+      font-size:1rem;
+      line-height:1.55;
+    }
+
+    .fact strong{
+      display:block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.76rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:3px;
+    }
+
+    .container{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 22px 80px;
+    }
+
+    .article-grid{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 300px;
+      gap:52px;
+      align-items:start;
+    }
+
+    .article{
+      min-width:0;
+    }
+
+    .article-body{
+      max-width:var(--reading);
+    }
+
+    .kicker{
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent-2);
+      font-size:.76rem;
+      margin:0 0 14px 0;
+    }
+
+    .standfirst{
+      font-size:1.22rem;
+      color:#3a3835;
+      margin:0 0 22px 0;
+    }
+
+    .article p{
+      font-size:1.34rem;
+      margin:0 0 1.3em 0;
+    }
+
+    .dropcap:first-letter{
+      float:left;
+      font-size:4.2rem;
+      line-height:.8;
+      padding-right:10px;
+      padding-top:9px;
+      color:var(--accent-2);
+      font-weight:700;
+    }
+
+    .story-section{
+      padding:42px 0;
+      border-top:1px solid var(--line);
+    }
+
+    .section-title{
+      max-width:860px;
+      font-size:clamp(1.8rem, 4vw, 3.1rem);
+      line-height:1.1;
+      margin:0 0 18px 0;
+      letter-spacing:-.02em;
+    }
+
+    .section-subtitle{
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      font-size:.75rem;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .thesis-box{
+      margin:36px 0 12px;
+      padding:30px;
+      background:linear-gradient(135deg, rgba(15,61,94,.06), rgba(202,164,106,.12));
+      border:1px solid rgba(15,61,94,.12);
+      border-left:6px solid var(--accent);
+      box-shadow:var(--shadow);
+    }
+
+    .thesis-box h3{
+      margin:0 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+
+    .thesis-box p{
+      margin:0;
+      font-size:1.3rem;
+      line-height:1.7;
+    }
+
+    .full-bleed{
+      margin:34px 0 18px;
+      background:#ece7e1;
+      border:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .full-bleed img{
+      width:100%;
+      max-height:530px;
+      object-fit:cover;
+    }
+
+    .caption{
+      padding:12px 16px 16px;
+      font-size:.96rem;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .editor-note{
+      margin:28px 0 26px;
+      padding:18px 20px;
+      background:#f0ece7;
+      border:1px dashed #c9bfb5;
+      font-size:1rem;
+      color:#514d47;
+    }
+
+    blockquote.pullquote{
+      margin:42px 0;
+      padding:12px 0 12px 24px;
+      border-left:4px solid var(--accent-3);
+      font-size:2rem;
+      line-height:1.35;
+      font-style:italic;
+      color:#1c1b19;
+    }
+
+    .data-callout{
+      margin:28px 0 22px;
+      padding:22px 24px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .data-callout .big{
+      font-size:3rem;
+      line-height:1;
+      margin:0 0 8px 0;
+      color:var(--accent-2);
+      font-weight:700;
+    }
+
+    .data-callout p{
+      margin:0;
+      font-size:1.08rem;
+      color:#393632;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:start;
+      margin:28px 0;
+    }
+
+    .info-card{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .info-card h4{
+      margin:0 0 12px;
+      font-size:1.2rem;
+      line-height:1.35;
+    }
+
+    .info-card p{
+      font-size:1.03rem;
+      margin:0;
+      line-height:1.7;
+    }
+
+    .mini-label{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent-2);
+      margin-bottom:10px;
+      display:block;
+    }
+
+    .video-wrap{
+      margin:30px 0 10px;
+      background:#111;
+      aspect-ratio:16 / 9;
+      width:100%;
+      border:1px solid #222;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .video-wrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .chart-block{
+      margin:34px 0;
+      padding:24px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .chart-block h4{
+      margin:0 0 8px;
+      font-size:1.45rem;
+      line-height:1.3;
+    }
+
+    .chart-block .chart-note{
+      margin:0 0 24px;
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    .bar-chart{
+      display:grid;
+      gap:18px;
+    }
+
+    .bar-row{
+      display:grid;
+      grid-template-columns:170px 1fr 70px;
+      gap:14px;
+      align-items:center;
+    }
+
+    .bar-label{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.95rem;
+      color:#2c2a27;
+    }
+
+    .bar-track{
+      width:100%;
+      height:22px;
+      background:#eee8e1;
+      border-radius:999px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .bar-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-3));
+    }
+
+    .bar-fill.alt{
+      background:linear-gradient(90deg,var(--accent-2),#d98b71);
+    }
+
+    .bar-value{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.95rem;
+      text-align:right;
+      color:#333;
+      font-weight:700;
+    }
+
+    .timeline{
+      display:grid;
+      gap:16px;
+      margin:30px 0;
+      padding-left:18px;
+      border-left:2px solid #d0c6bc;
+    }
+
+    .timeline-item{
+      position:relative;
+      padding-left:14px;
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-24px;
+      top:.48em;
+      width:10px;
+      height:10px;
+      background:var(--accent-2);
+      border-radius:50%;
+      box-shadow:0 0 0 4px rgba(140,47,57,.12);
+    }
+
+    .timeline-item strong{
+      display:block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.86rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:2px;
+    }
+
+    .timeline-item span{
+      font-size:1.05rem;
+      line-height:1.6;
+      color:#312f2c;
+    }
+
+    .argument-divider{
+      margin:52px 0 26px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .argument-divider::before,
+    .argument-divider::after{
+      content:"";
+      flex:1;
+      height:1px;
+      background:var(--line);
+    }
+
+    .duel{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin:30px 0;
+    }
+
+    .duel-card{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:24px;
+      position:relative;
+    }
+
+    .duel-card.support{
+      border-top:5px solid var(--accent-3);
+    }
+
+    .duel-card.refute{
+      border-top:5px solid var(--accent-2);
+    }
+
+    .duel-card h4{
+      margin:0 0 12px;
+      font-size:1.35rem;
+    }
+
+    .duel-card p{
+      margin:0;
+      font-size:1.05rem;
+      line-height:1.75;
+    }
+
+    .sidebar{
+      position:sticky;
+      top:88px;
+      align-self:start;
+    }
+
+    .sidebar-card{
+      background:rgba(255,255,255,.7);
+      border:1px solid var(--line);
+      padding:18px;
+      margin-bottom:18px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .sidebar-card h3{
+      margin:0 0 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .sidebar-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .sidebar-card li{
+      margin-bottom:8px;
+      font-size:.98rem;
+      line-height:1.55;
+    }
+
+    .quote-box{
+      background:#1f1f1f;
+      color:#fff;
+      padding:24px;
+      border-left:5px solid var(--accent-3);
+    }
+
+    .quote-box p{
+      font-size:1.2rem;
+      line-height:1.7;
+      margin:0 0 10px;
+      color:#fff;
+    }
+
+    .quote-box small{
+      color:rgba(255,255,255,.7);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .refs{
+      margin-top:50px;
+      padding-top:28px;
+      border-top:2px solid var(--dark);
+    }
+
+    .refs h3{
+      margin:0 0 16px;
+      font-size:1.9rem;
+    }
+
+    .refs ol{
+      padding-left:20px;
+      margin:0;
+    }
+
+    .refs li{
+      margin-bottom:14px;
+      font-size:1rem;
+      line-height:1.65;
+    }
+
+    .footer{
+      margin-top:42px;
+      padding:26px 0 60px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 1100px){
+      .article-grid{
+        grid-template-columns:1fr;
+      }
+      .sidebar{
+        position:static;
+      }
+    }
+
+    @media (max-width: 860px){
+      .lead-grid,
+      .split,
+      .duel{
+        grid-template-columns:1fr;
+      }
+      .quick-facts{
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding-left:0;
+        padding-top:18px;
+      }
+      .bar-row{
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+      .headline{
+        max-width:100%;
+      }
+      .article p{
+        font-size:1.18rem;
+      }
+      blockquote.pullquote{
+        font-size:1.55rem;
+      }
+    }
+
+    @media (max-width: 560px){
+      .hero{
+        min-height:76vh;
+      }
+      .hero-content{
+        padding-top:70px;
+        padding-bottom:44px;
+      }
+      .lead-card{
+        margin-top:-30px;
+        padding:20px;
+      }
+      .thesis-box,
+      .chart-block,
+      .info-card,
+      .duel-card,
+      .sidebar-card{
+        padding:18px;
+      }
+      .article p{
+        font-size:1.08rem;
+      }
+      .section-title{
+        font-size:2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Análisis de Tendencias Económicas</div>
+      <div class="section-label">Especial Colombia · Empresas con propósito</div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Reportaje especial · Ensayo multimedia</div>
+      <h1 class="headline">El dilema del propósito en Colombia: ¿empresa que transforma o discurso que vende?</h1>
+      <p class="deck">
+        En un país atravesado por desigualdad, informalidad y desconfianza institucional, cada vez más empresas hablan de sostenibilidad, bienestar y propósito superior. Pero una pregunta sigue abierta: ¿las empresas con propósito están cambiando de verdad la relación entre negocio y sociedad, o solo están refinando su estrategia reputacional?
+      </p>
+      <div class="byline">
+        <span>Por Analista de Tendencias Económicas</span>
+        <span class="meta-dot">Narrativa digital sobre empresa, sostenibilidad y desarrollo humano</span>
+        <span class="meta-dot">Colombia · 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lead-card reveal">
+    <div class="lead-grid">
+      <div>
+        <p>
+          Durante años, la empresa tradicional fue evaluada sobre todo por su capacidad de producir utilidades, crecer y competir. Sin embargo, el escenario contemporáneo ha obligado a revisar esa lógica. El referente del eje plantea que las megatendencias globales, la crisis socioambiental y la necesidad de nuevas formas de desarrollo exigen organizaciones que ya no piensen únicamente en el accionista, sino también en la comunidad, el ambiente, los trabajadores y los demás grupos de interés.
+        </p>
+      </div>
+      <aside class="quick-facts">
+        <h3>La pregunta que guía este reportaje</h3>
+        <div class="fact">
+          <strong>Pregunta polémica</strong>
+          ¿Es el modelo de Empresas con Propósito en Colombia un motor real de cambio político y social, o es simplemente una fachada de greenwashing para vender más?
+        </div>
+        <div class="fact">
+          <strong>Hipótesis central</strong>
+          El propósito sí puede transformar, pero solo cuando se vuelve verificable en la operación, la gobernanza y el impacto.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="article-grid">
+      <article class="article">
+        <div class="article-body">
+
+          <section class="story-section reveal">
+            <p class="standfirst dropcap">
+              En Colombia, esa transformación tomó forma jurídica con las
+              <a href="#" target="_blank">sociedades BIC</a>, creadas por la
+              <a href="#" target="_blank">Ley 1901 de 2018</a> y reglamentadas por el
+              <a href="#" target="_blank">Decreto 2046 de 2019</a>. La norma permite que cualquier sociedad comercial adopte voluntariamente esta condición e incorpore un propósito social y ambiental que vaya más allá del beneficio exclusivo de sus accionistas.
+            </p>
+
+            <p>
+              El problema es que la existencia de una figura legal o de un discurso corporativo no garantiza, por sí sola, una transformación real. Hoy, cuando la sostenibilidad también se volvió un activo de marca, el verdadero debate no es quién dice tener propósito, sino quién logra demostrarlo con prácticas, indicadores y resultados.
+            </p>
+
+            <div class="thesis-box">
+              <h3>Tesis central</h3>
+              <p>
+                Sostengo que el modelo de empresas con propósito en Colombia sí representa un avance importante frente a la empresa tradicional, porque incorpora valor social, ambiental y humano en la lógica del negocio; sin embargo, su impacto real sigue siendo desigual y su legitimidad depende de que ese propósito se traduzca en prácticas verificables de gobernanza, trabajo digno, relación con la comunidad y sostenibilidad. Cuando esa coherencia no existe, el propósito corre el riesgo de convertirse en <a href="#" target="_blank">greenwashing</a> o maquillaje reputacional.
+              </p>
+            </div>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="section-subtitle">Argumento 1</div>
+            <h2 class="section-title">El modelo BIC sí plantea una ruptura real frente a la empresa tradicional</h2>
+
+            <p>
+              El primer punto a favor del modelo de empresas con propósito es que, al menos en el plano conceptual y normativo, sí propone una transformación de la lógica empresarial. El referente define a las organizaciones con propósito como aquellas que identifican el beneficio mutuo que genera su actividad y colocan esa razón de ser por encima de la mera rentabilidad. Además, las conecta con un modelo de gestión que busca crear valor económico, social y ambiental mediante innovación, desarrollo humano, desarrollo sustentable y relaciones fructíferas con sus grupos de interés.
+            </p>
+
+            <div class="split">
+              <div class="info-card">
+                <span class="mini-label">Marco normativo</span>
+                <h4>Una empresa ya no se juzga solo por cuánto gana</h4>
+                <p>
+                  En el plano jurídico, la regulación colombiana va en la misma dirección. El Ministerio de Comercio explica que las sociedades BIC incorporan en sus estatutos un propósito social y ambiental que excede el interés exclusivo de los accionistas, y la norma contempla dimensiones como gobernanza, trabajadores, comunidad y medio ambiente.
+                </p>
+              </div>
+
+              <div class="info-card">
+                <span class="mini-label">Lectura crítica</span>
+                <h4>Del beneficio privado al valor compartido</h4>
+                <p>
+                  Este cambio no es menor. Significa reconocer que una empresa no debería medirse solo por cómo gana, a quién beneficia, qué impactos genera y qué tipo de relaciones construye. En ese sentido, el modelo BIC sí abre una posibilidad real de evolución empresarial.
+                </p>
+              </div>
+            </div>
+
+            <blockquote class="pullquote">
+              “Afirmar que todas las empresas con propósito son puro marketing sería una simplificación. El modelo sí contiene una base normativa y ética distinta.”
+            </blockquote>
+
+            <div class="full-bleed">
+              <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80" alt="Equipo de trabajo en contexto corporativo" />
+              <div class="caption">
+                Imagen de contexto sugerida para el reportaje. Reemplaza esta fotografía por una imagen institucional sobre sociedades BIC, normativa empresarial o una escena empresarial colombiana.
+              </div>
+            </div>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="section-subtitle">Recurso audiovisual</div>
+            <h2 class="section-title">Un caso que muestra la promesa del modelo</h2>
+
+            <p>
+              Para comprender cómo una empresa intenta integrar el propósito al modelo de negocio, este reportaje incorpora un video de apoyo sobre una experiencia BIC en Colombia. La pieza funciona como evidencia narrativa del lado más favorable del debate: el momento en que el propósito deja de ser una etiqueta aspiracional y empieza a convertirse en arquitectura empresarial.
+            </p>
+
+            <div class="video-wrap">
+              <!-- REEMPLAZA EL src POR EL VIDEO DEFINITIVO -->
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Magia Salvaje SAS BIC - Empresas con propósito"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="caption">
+              Video de apoyo: experiencia colombiana de una empresa BIC que ejemplifica cómo el propósito puede integrarse al modelo de negocio. Reemplaza este video por “Magia Salvaje SAS BIC - Empresas con propósito” u otra fuente validada.
+            </div>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="section-subtitle">Argumento 2</div>
+            <h2 class="section-title">Sin desarrollo humano y grupos de interés, el propósito se queda en discurso</h2>
+
+            <p>
+              El segundo argumento surge del propio referente: una organización con propósito no puede reducirse a un eslogan. Su autenticidad depende de cómo gestiona a las personas y de cómo integra a sus stakeholders en la toma de decisiones y en la creación de valor. El eje insiste en tres principios: grupos de interés, gestión del desarrollo humano y autogestión.
+            </p>
+
+            <p>
+              En el primero, la empresa define su oferta de valor, sus ventajas competitivas y su relación con el desarrollo sustentable; en el segundo, incorpora cultura flexible, redes de relaciones, capital humano, capacitación, valores, reglas y comunicación; en el tercero, promueve participación, convivencia y equipos con mayor autonomía.
+            </p>
+
+            <div class="data-callout">
+              <div class="big">Fin, no medio</div>
+              <p>
+                La gerencia humanista refuerza esta exigencia: una organización con propósito debe tratar a las personas como sujetos de dignidad, participación y desarrollo, no como piezas intercambiables de una cadena productiva.
+              </p>
+            </div>
+
+            <p>
+              Bajo esa lógica, una empresa con propósito no se valida por su narrativa institucional sino por decisiones concretas: salarios, condiciones de trabajo, formación, participación, bienestar, transparencia, relación con proveedores, impacto comunitario y consistencia ambiental. En otras palabras, el propósito no se prueba en campañas; se prueba en la operación.
+            </p>
+
+            <div class="split">
+              <div>
+                <p>
+                  Un caso útil para ilustrar esta aspiración es
+                  <a href="#" target="_blank">Bancolombia sostenibilidad</a>, cuyo propósito corporativo declarado es “promover el desarrollo económico sostenible para lograr el bienestar de todos”. Su propia información institucional vincula ese propósito con
+                  <a href="#" target="_blank">inclusión financiera</a>, finanzas sostenibles y un modelo de sostenibilidad que cubre gobernanza, ambiente y relación con clientes.
+                </p>
+
+                <p>
+                  Este tipo de casos muestra que el lenguaje del propósito puede convertirse en una arquitectura estratégica real cuando se asocia con políticas, productos, líneas de financiación e indicadores. No obstante, incluso en estos casos, la evaluación crítica sigue siendo necesaria: declarar un propósito es apenas el punto de partida, no la prueba definitiva de impacto.
+                </p>
+              </div>
+
+              <aside class="info-card">
+                <span class="mini-label">Caso empresarial</span>
+                <h4>Bancolombia como ejemplo de propósito institucionalizado</h4>
+                <p>
+                  Aquí conviene insertar una captura de su portal de sostenibilidad o de su declaración de propósito. El objetivo visual es mostrar cómo ciertas empresas sí han convertido el propósito en una pieza visible de su arquitectura estratégica.
+                </p>
+              </aside>
+            </div>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="section-subtitle">Argumento 3</div>
+            <h2 class="section-title">En Colombia, el mayor riesgo no es la ausencia de propósito, sino la falta de evidencia</h2>
+
+            <p>
+              El argumento crítico es el más importante. En el contexto colombiano, el problema no parece ser que falte discurso sobre sostenibilidad, sino que muchas veces falta estructura verificable para convertirlo en resultados medibles. A nivel internacional, Naciones Unidas define el greenwashing como el uso de tácticas engañosas que promueven falsas soluciones climáticas y retrasan la acción concreta. La OCDE también advierte sobre los daños de las afirmaciones ambientales falsas, engañosas o no sustentadas.
+            </p>
+
+            <p>
+              Ese riesgo no debe asumirse automáticamente para cada empresa colombiana, pero sí es pertinente como advertencia crítica. De hecho, un diagnóstico de sostenibilidad de la
+              <a href="#" target="_blank">Superintendencia de Sociedades</a> encontró que, entre 1.107 empresas encuestadas, el 72% no contaba con procedimientos de diseño, dirección y aprobación de programas de sostenibilidad, y solo el 17% segmentaba su matriz de riesgos para evaluar impactos en dimensiones de sostenibilidad.
+            </p>
+
+            <blockquote class="pullquote">
+              La brecha no está entre “decir” y “no decir”, sino entre decir y poder demostrar.
+            </blockquote>
+
+            <div class="chart-block">
+              <h4>Cuando la sostenibilidad no alcanza a convertirse en sistema de gestión</h4>
+              <p class="chart-note">
+                Visualización sugerida con base en el diagnóstico de sostenibilidad empresarial. Puedes reemplazarla luego por un gráfico hecho en Excel, Canva o Infogram si tu docente exige una visualización externa.
+              </p>
+
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <div class="bar-label">Empresas sin procedimientos formales de sostenibilidad</div>
+                  <div class="bar-track"><div class="bar-fill alt" style="width:72%;"></div></div>
+                  <div class="bar-value">72%</div>
+                </div>
+
+                <div class="bar-row">
+                  <div class="bar-label">Empresas que segmentan su matriz de riesgos</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:17%;"></div></div>
+                  <div class="bar-value">17%</div>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Ese dato no significa que todas las empresas con propósito en Colombia sean una fachada. Significa algo más preciso: existe una brecha real entre el lenguaje de sostenibilidad y la capacidad organizacional para gestionarla seriamente. Por eso, el discurso del propósito necesita pruebas: métricas, reportes, gobernanza, trazabilidad e indicadores que permitan distinguir entre compromiso real y reputación cosmética.
+            </p>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="section-subtitle">Expansión del modelo</div>
+            <h2 class="section-title">Más empresas BIC, pero no necesariamente más profundidad</h2>
+
+            <p>
+              El crecimiento del modelo BIC en Colombia muestra que existe interés empresarial por este paradigma.
+              <a href="#" target="_blank">Confecámaras</a> reportó más de 704 sociedades BIC en 2021 y luego señaló que en el país había más de 1.300 sociedades BIC, destacando a Colombia como líder regional en esta figura.
+            </p>
+
+            <div class="chart-block">
+              <h4>Expansión del modelo BIC en Colombia: crecimiento formal, impacto aún en debate</h4>
+              <p class="chart-note">
+                El aumento del registro muestra legitimidad institucional. Lo que aún está en discusión es si ese crecimiento cuantitativo se traduce en cambio cualitativo.
+              </p>
+
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <div class="bar-label">Sociedades BIC reportadas en 2021</div>
+                  <div class="bar-track"><div class="bar-fill" style="width:54%;"></div></div>
+                  <div class="bar-value">704</div>
+                </div>
+
+                <div class="bar-row">
+                  <div class="bar-label">Sociedades BIC reportadas posteriormente</div>
+                  <div class="bar-track"><div class="bar-fill alt" style="width:100%;"></div></div>
+                  <div class="bar-value">1.300+</div>
+                </div>
+              </div>
+            </div>
+
+            <p>
+              Ese crecimiento es relevante porque sugiere adopción institucional y legitimidad. Pero también plantea una pregunta crítica: ¿el aumento en el número de empresas BIC implica necesariamente una mejora equivalente en su impacto real? No de forma automática. Más empresas registradas no significan, por sí mismas, mejor gestión humana, menor daño ambiental o mayor transformación social. El crecimiento cuantitativo del modelo necesita estar acompañado por profundidad cualitativa.
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <strong>2018</strong>
+                <span>Se establece la base jurídica del modelo con la Ley 1901.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>2019</strong>
+                <span>El Decreto 2046 reglamenta la figura y define lineamientos de implementación.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>2021</strong>
+                <span>Confecámaras reporta más de 704 sociedades BIC en el país.</span>
+              </div>
+              <div class="timeline-item">
+                <strong>Actualidad</strong>
+                <span>El ecosistema supera las 1.300 empresas, pero el debate sobre impacto sigue abierto.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="argument-divider">El choque de perspectivas</div>
+
+            <div class="duel">
+              <div class="duel-card support">
+                <span class="mini-label">Contraargumento</span>
+                <h4>“Aun con imperfecciones, ya es una mejora suficiente”</h4>
+                <p>
+                  Quienes defienden sin matices a las empresas con propósito sostienen que, aun con imperfecciones, este modelo ya representa una mejora suficiente frente a la empresa tradicional. Su argumento es que al menos logra poner en la agenda temas antes marginales, como sostenibilidad, bienestar laboral, gobernanza ética y relación con la comunidad. Además, la existencia de una regulación específica y de herramientas voluntarias de reporte demostraría que el país sí avanza hacia una economía más responsable.
+                </p>
+              </div>
+
+              <div class="duel-card refute">
+                <span class="mini-label">Refutación</span>
+                <h4>Poner un tema en la agenda no equivale a resolverlo</h4>
+                <p>
+                  Ese argumento es parcialmente válido, pero insuficiente. Una empresa puede adoptar la forma BIC, certificar ciertos procesos o construir una narrativa institucional atractiva y, aun así, no transformar de manera sustancial sus relaciones laborales, su cadena de valor o sus impactos sociales y ambientales. La pregunta correcta no es si el propósito suena bien, sino si logra modificar la estructura real de la empresa.
+                </p>
+              </div>
+            </div>
+
+            <p>
+              El propio referente permite llegar a esta crítica, porque no reduce la organización con propósito a un cambio formal de estatutos. Por el contrario, la vincula con desarrollo humano, autogestión, aprendizaje organizacional, grupos de interés y gestión organizacional entendida como intersección entre desarrollo humano, condiciones laborales y productividad. Solo allí se diferencia una transformación genuina de una fachada persuasiva.
+            </p>
+          </section>
+
+          <section class="story-section reveal">
+            <div class="section-subtitle">Conclusión editorial</div>
+            <h2 class="section-title">El futuro del propósito no depende del discurso, sino de la prueba</h2>
+
+            <p>
+              El modelo de empresas con propósito en Colombia no debe ser descartado como una simple moda, porque sí introduce una ruptura importante frente a la empresa tradicional: reconoce a la persona como eje, amplía el horizonte hacia los grupos de interés y somete la rentabilidad a una lógica más amplia de valor económico, social y ambiental. Esa visión coincide con el referente, que plantea la necesidad de organizaciones más humanas, participativas y orientadas al bienestar mutuo.
+            </p>
+
+            <p>
+              Sin embargo, tampoco debe idealizarse. En un entorno donde la sostenibilidad ya tiene valor reputacional, el propósito puede ser usado como señal de prestigio sin convertirse en práctica transformadora. Por eso, en Colombia el verdadero dilema no es “rentabilidad o impacto”, sino qué tipo de rentabilidad se considera legítima y qué evidencia se exige para creer en el impacto.
+            </p>
+
+            <div class="quote-box">
+              <p>
+                El futuro del país no depende de que más empresas aprendan a hablar de propósito, sino de que sean capaces de demostrarlo. Cuando el propósito se refleja en empleo digno, escucha activa, innovación con sentido social, sostenibilidad verificable y mejores relaciones con la comunidad, sí puede convertirse en motor de cambio. Cuando no, será apenas una promesa bonita con excelente mercadeo.
+              </p>
+              <small>Cierre del análisis</small>
+            </div>
+          </section>
+
+          <section class="refs reveal">
+            <h3>Referencias base</h3>
+            <ol>
+              <li>Referente de pensamiento del Eje 3 sobre organizaciones con propósito, gerencia humanista, desarrollo humano y gestión organizacional.</li>
+              <li><a href="#" target="_blank">Ley 1901 de 2018</a>.</li>
+              <li><a href="#" target="_blank">Decreto 2046 de 2019</a>.</li>
+              <li><a href="#" target="_blank">Ministerio de Comercio, Industria y Turismo (MINCIT): normativa y explicación de sociedades BIC</a>.</li>
+              <li><a href="#" target="_blank">Confecámaras: cifras y crecimiento de sociedades BIC</a>.</li>
+              <li><a href="#" target="_blank">Superintendencia de Sociedades: diagnóstico de sostenibilidad</a>.</li>
+              <li><a href="#" target="_blank">Naciones Unidas: definición y riesgos del greenwashing</a>.</li>
+              <li><a href="#" target="_blank">OCDE: afirmaciones ambientales engañosas y protección al consumidor</a>.</li>
+              <li><a href="#" target="_blank">Bancolombia: propósito y sostenibilidad</a>.</li>
+              <li><a href="#" target="_blank">Magia Salvaje SAS BIC</a>.</li>
+            </ol>
+          </section>
+
+          <footer class="footer reveal">
+            <p>
+              Este reportaje digital fue diseñado para responder una pregunta polémica desde una perspectiva crítica, con estructura narrativa, visualización de datos y soporte multimedia. Antes de publicarlo, reemplaza los enlaces de prueba, el video temporal y las imágenes genéricas por tus fuentes definitivas.
+            </p>
+          </footer>
+
+        </div>
+      </article>
+
+      <aside class="sidebar reveal">
+        <div class="sidebar-card">
+          <h3>En esta publicación</h3>
+          <ul>
+            <li>Qué prometen las empresas con propósito.</li>
+            <li>Qué cambia realmente con el modelo BIC.</li>
+            <li>Por qué el desarrollo humano es la prueba decisiva.</li>
+            <li>Qué revela la brecha entre discurso y evidencia.</li>
+            <li>Por qué más empresas registradas no garantizan más impacto.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Hipervínculos sugeridos</h3>
+          <ul>
+            <li><a href="#" target="_blank">Ley 1901 de 2018</a></li>
+            <li><a href="#" target="_blank">Decreto 2046 de 2019</a></li>
+            <li><a href="#" target="_blank">Sociedades BIC</a></li>
+            <li><a href="#" target="_blank">Confecámaras</a></li>
+            <li><a href="#" target="_blank">Superintendencia de Sociedades</a></li>
+            <li><a href="#" target="_blank">Greenwashing</a></li>
+            <li><a href="#" target="_blank">Bancolombia sostenibilidad</a></li>
+            <li><a href="#" target="_blank">Inclusión financiera</a></li>
+            <li><a href="#" target="_blank">Magia Salvaje SAS BIC</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Texto breve para el PDF de entrega</h3>
+          <p style="font-size:.98rem; line-height:1.7; margin:0;">
+            Este ensayo multimedia examina críticamente el modelo de empresas con propósito en Colombia y analiza si su impacto social, económico y ambiental es auténtico o si, en algunos casos, funciona más como estrategia reputacional. A partir del referente de pensamiento sobre organizaciones con propósito, gerencia humanista y desarrollo humano, se contrasta la promesa del modelo BIC con evidencia normativa y datos del contexto colombiano.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('load', updateProgress);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
