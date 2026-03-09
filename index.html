@@ -1,4 +1,817 @@
-<section class="story-section reveal">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El dilema del propósito en Colombia</title>
+  <meta name="description" content="Ensayo multimedia sobre empresas con propósito en Colombia: ¿motor real de cambio o fachada reputacional?" />
+
+  <style>
+    :root{
+      --bg:#f5f3ef;
+      --paper:#fbfaf8;
+      --text:#242424;
+      --muted:#6f6a63;
+      --line:#d9d3cc;
+      --accent:#0f3d5e;
+      --accent-2:#8c2f39;
+      --accent-3:#caa46a;
+      --dark:#151515;
+      --max:1200px;
+      --reading:720px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.75;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    a{
+      color:var(--accent);
+      text-decoration:none;
+      border-bottom:1px solid rgba(15,61,94,.25);
+      transition:.2s ease;
+    }
+    a:hover{
+      color:var(--accent-2);
+      border-bottom-color:rgba(140,47,57,.4);
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter: blur(10px);
+      background:rgba(245,243,239,.9);
+      border-bottom:1px solid var(--line);
+    }
+
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      font-family: Georgia, "Times New Roman", serif;
+      font-size:1.2rem;
+      font-weight:700;
+      letter-spacing:.03em;
+      color:#111;
+      white-space:nowrap;
+    }
+
+    .section-label{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .progress-wrap{
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      width:100%;
+      height:2px;
+      background:transparent;
+    }
+
+    .progress-bar{
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    }
+
+    .hero{
+      position:relative;
+      min-height:88vh;
+      display:flex;
+      align-items:flex-end;
+      background:
+        linear-gradient(to top, rgba(12,12,12,.78) 0%, rgba(12,12,12,.42) 35%, rgba(12,12,12,.1) 60%, rgba(12,12,12,.08) 100%),
+        url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color:#fff;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, rgba(15,61,94,.24), rgba(140,47,57,.12));
+      mix-blend-mode:screen;
+      pointer-events:none;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:var(--max);
+      margin:0 auto;
+      width:100%;
+      padding:90px 22px 60px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#f2dfc0;
+      margin-bottom:18px;
+    }
+
+    .headline{
+      max-width:900px;
+      font-size:clamp(2.3rem, 6vw, 5rem);
+      line-height:1.03;
+      margin:0 0 18px 0;
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+
+    .deck{
+      max-width:780px;
+      font-size:clamp(1.1rem, 2vw, 1.7rem);
+      line-height:1.5;
+      color:rgba(255,255,255,.92);
+      margin:0 0 26px 0;
+    }
+
+    .byline{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.9rem;
+      color:rgba(255,255,255,.82);
+    }
+
+    .meta-dot::before{
+      content:"•";
+      margin-right:10px;
+      opacity:.5;
+    }
+
+    .lead-card{
+      max-width:940px;
+      margin:-55px auto 70px;
+      background:var(--paper);
+      border:1px solid rgba(217,211,204,.8);
+      box-shadow:var(--shadow);
+      position:relative;
+      z-index:3;
+      padding:28px 28px;
+    }
+
+    .lead-grid{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:28px;
+    }
+
+    .lead-card p{
+      margin:0;
+      font-size:1.08rem;
+      color:#322f2b;
+    }
+
+    .quick-facts{
+      border-left:1px solid var(--line);
+      padding-left:22px;
+    }
+
+    .quick-facts h3{
+      margin:0 0 14px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--muted);
+    }
+
+    .fact{
+      margin:0 0 14px 0;
+      font-size:1rem;
+      line-height:1.55;
+    }
+
+    .fact strong{
+      display:block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.76rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:3px;
+    }
+
+    .container{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 22px 80px;
+    }
+
+    .article-grid{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 300px;
+      gap:52px;
+      align-items:start;
+    }
+
+    .article{
+      min-width:0;
+    }
+
+    .article-body{
+      max-width:var(--reading);
+    }
+
+    .kicker{
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent-2);
+      font-size:.76rem;
+      margin:0 0 14px 0;
+    }
+
+    .standfirst{
+      font-size:1.22rem;
+      color:#3a3835;
+      margin:0 0 22px 0;
+    }
+
+    .article p{
+      font-size:1.34rem;
+      margin:0 0 1.3em 0;
+    }
+
+    .dropcap:first-letter{
+      float:left;
+      font-size:4.2rem;
+      line-height:.8;
+      padding-right:10px;
+      padding-top:9px;
+      color:var(--accent-2);
+      font-weight:700;
+    }
+
+    .story-section{
+      padding:42px 0;
+      border-top:1px solid var(--line);
+    }
+
+    .section-title{
+      max-width:860px;
+      font-size:clamp(1.8rem, 4vw, 3.1rem);
+      line-height:1.1;
+      margin:0 0 18px 0;
+      letter-spacing:-.02em;
+    }
+
+    .section-subtitle{
+      font-family: Arial, Helvetica, sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      font-size:.75rem;
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .thesis-box{
+      margin:36px 0 12px;
+      padding:30px;
+      background:linear-gradient(135deg, rgba(15,61,94,.06), rgba(202,164,106,.12));
+      border:1px solid rgba(15,61,94,.12);
+      border-left:6px solid var(--accent);
+      box-shadow:var(--shadow);
+    }
+
+    .thesis-box h3{
+      margin:0 0 12px 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+
+    .thesis-box p{
+      margin:0;
+      font-size:1.3rem;
+      line-height:1.7;
+    }
+
+    .full-bleed{
+      margin:34px 0 18px;
+      background:#ece7e1;
+      border:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .full-bleed img{
+      width:100%;
+      max-height:530px;
+      object-fit:cover;
+    }
+
+    .caption{
+      padding:12px 16px 16px;
+      font-size:.96rem;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .editor-note{
+      margin:28px 0 26px;
+      padding:18px 20px;
+      background:#f0ece7;
+      border:1px dashed #c9bfb5;
+      font-size:1rem;
+      color:#514d47;
+    }
+
+    blockquote.pullquote{
+      margin:42px 0;
+      padding:12px 0 12px 24px;
+      border-left:4px solid var(--accent-3);
+      font-size:2rem;
+      line-height:1.35;
+      font-style:italic;
+      color:#1c1b19;
+    }
+
+    .data-callout{
+      margin:28px 0 22px;
+      padding:22px 24px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .data-callout .big{
+      font-size:3rem;
+      line-height:1;
+      margin:0 0 8px 0;
+      color:var(--accent-2);
+      font-weight:700;
+    }
+
+    .data-callout p{
+      margin:0;
+      font-size:1.08rem;
+      color:#393632;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:start;
+      margin:28px 0;
+    }
+
+    .info-card{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .info-card h4{
+      margin:0 0 12px;
+      font-size:1.2rem;
+      line-height:1.35;
+    }
+
+    .info-card p{
+      font-size:1.03rem;
+      margin:0;
+      line-height:1.7;
+    }
+
+    .mini-label{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent-2);
+      margin-bottom:10px;
+      display:block;
+    }
+
+    .video-wrap{
+      margin:30px 0 10px;
+      background:#111;
+      aspect-ratio:16 / 9;
+      width:100%;
+      border:1px solid #222;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .video-wrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .chart-block{
+      margin:34px 0;
+      padding:24px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .chart-block h4{
+      margin:0 0 8px;
+      font-size:1.45rem;
+      line-height:1.3;
+    }
+
+    .chart-block .chart-note{
+      margin:0 0 24px;
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    .bar-chart{
+      display:grid;
+      gap:18px;
+    }
+
+    .bar-row{
+      display:grid;
+      grid-template-columns:170px 1fr 70px;
+      gap:14px;
+      align-items:center;
+    }
+
+    .bar-label{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.95rem;
+      color:#2c2a27;
+    }
+
+    .bar-track{
+      width:100%;
+      height:22px;
+      background:#eee8e1;
+      border-radius:999px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .bar-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-3));
+    }
+
+    .bar-fill.alt{
+      background:linear-gradient(90deg,var(--accent-2),#d98b71);
+    }
+
+    .bar-value{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.95rem;
+      text-align:right;
+      color:#333;
+      font-weight:700;
+    }
+
+    .timeline{
+      display:grid;
+      gap:16px;
+      margin:30px 0;
+      padding-left:18px;
+      border-left:2px solid #d0c6bc;
+    }
+
+    .timeline-item{
+      position:relative;
+      padding-left:14px;
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:-24px;
+      top:.48em;
+      width:10px;
+      height:10px;
+      background:var(--accent-2);
+      border-radius:50%;
+      box-shadow:0 0 0 4px rgba(140,47,57,.12);
+    }
+
+    .timeline-item strong{
+      display:block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.86rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:2px;
+    }
+
+    .timeline-item span{
+      font-size:1.05rem;
+      line-height:1.6;
+      color:#312f2c;
+    }
+
+    .argument-divider{
+      margin:52px 0 26px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:var(--muted);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .argument-divider::before,
+    .argument-divider::after{
+      content:"";
+      flex:1;
+      height:1px;
+      background:var(--line);
+    }
+
+    .duel{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin:30px 0;
+    }
+
+    .duel-card{
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:24px;
+      position:relative;
+    }
+
+    .duel-card.support{
+      border-top:5px solid var(--accent-3);
+    }
+
+    .duel-card.refute{
+      border-top:5px solid var(--accent-2);
+    }
+
+    .duel-card h4{
+      margin:0 0 12px;
+      font-size:1.35rem;
+    }
+
+    .duel-card p{
+      margin:0;
+      font-size:1.05rem;
+      line-height:1.75;
+    }
+
+    .sidebar{
+      position:sticky;
+      top:88px;
+      align-self:start;
+    }
+
+    .sidebar-card{
+      background:rgba(255,255,255,.7);
+      border:1px solid var(--line);
+      padding:18px;
+      margin-bottom:18px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .sidebar-card h3{
+      margin:0 0 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .sidebar-card ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .sidebar-card li{
+      margin-bottom:8px;
+      font-size:.98rem;
+      line-height:1.55;
+    }
+
+    .quote-box{
+      background:#1f1f1f;
+      color:#fff;
+      padding:24px;
+      border-left:5px solid var(--accent-3);
+    }
+
+    .quote-box p{
+      font-size:1.2rem;
+      line-height:1.7;
+      margin:0 0 10px;
+      color:#fff;
+    }
+
+    .quote-box small{
+      color:rgba(255,255,255,.7);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .refs{
+      margin-top:50px;
+      padding-top:28px;
+      border-top:2px solid var(--dark);
+    }
+
+    .refs h3{
+      margin:0 0 16px;
+      font-size:1.9rem;
+    }
+
+    .refs ol{
+      padding-left:20px;
+      margin:0;
+    }
+
+    .refs li{
+      margin-bottom:14px;
+      font-size:1rem;
+      line-height:1.65;
+    }
+
+    .footer{
+      margin-top:42px;
+      padding:26px 0 60px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(24px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 1100px){
+      .article-grid{
+        grid-template-columns:1fr;
+      }
+      .sidebar{
+        position:static;
+      }
+    }
+
+    @media (max-width: 860px){
+      .lead-grid,
+      .split,
+      .duel{
+        grid-template-columns:1fr;
+      }
+      .quick-facts{
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding-left:0;
+        padding-top:18px;
+      }
+      .bar-row{
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+      .headline{
+        max-width:100%;
+      }
+      .article p{
+        font-size:1.18rem;
+      }
+      blockquote.pullquote{
+        font-size:1.55rem;
+      }
+    }
+
+    @media (max-width: 560px){
+      .hero{
+        min-height:76vh;
+      }
+      .hero-content{
+        padding-top:70px;
+        padding-bottom:44px;
+      }
+      .lead-card{
+        margin-top:-30px;
+        padding:20px;
+      }
+      .thesis-box,
+      .chart-block,
+      .info-card,
+      .duel-card,
+      .sidebar-card{
+        padding:18px;
+      }
+      .article p{
+        font-size:1.08rem;
+      }
+      .section-title{
+        font-size:2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">Análisis de Tendencias Económicas</div>
+      <div class="section-label">Especial Colombia · Empresas con propósito</div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Reportaje especial · Ensayo multimedia</div>
+      <h1 class="headline">El dilema del propósito en Colombia: ¿empresa que transforma o discurso que vende?</h1>
+      <p class="deck">
+        En un país atravesado por desigualdad, informalidad y desconfianza institucional, cada vez más empresas hablan de sostenibilidad, bienestar y propósito superior. Pero una pregunta sigue abierta: ¿las empresas con propósito están cambiando de verdad la relación entre negocio y sociedad, o solo están refinando su estrategia reputacional?
+      </p>
+      <div class="byline">
+        <span>Por Analista de Tendencias Económicas</span>
+        <span class="meta-dot">Narrativa digital sobre empresa, sostenibilidad y desarrollo humano</span>
+        <span class="meta-dot">Colombia · 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lead-card reveal">
+    <div class="lead-grid">
+      <div>
+        <p>
+          Durante años, la empresa tradicional fue evaluada sobre todo por su capacidad de producir utilidades, crecer y competir. Sin embargo, el escenario contemporáneo ha obligado a revisar esa lógica. El referente del eje plantea que las megatendencias globales, la crisis socioambiental y la necesidad de nuevas formas de desarrollo exigen organizaciones que ya no piensen únicamente en el accionista, sino también en la comunidad, el ambiente, los trabajadores y los demás grupos de interés.
+        </p>
+      </div>
+      <aside class="quick-facts">
+        <h3>La pregunta que guía este reportaje</h3>
+        <div class="fact">
+          <strong>Pregunta polémica</strong>
+          ¿Es el modelo de Empresas con Propósito en Colombia un motor real de cambio político y social, o es simplemente una fachada de greenwashing para vender más?
+        </div>
+        <div class="fact">
+          <strong>Hipótesis central</strong>
+          El propósito sí puede transformar, pero solo cuando se vuelve verificable en la operación, la gobernanza y el impacto.
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="article-grid">
+      <article class="article">
+
+        <div class="article-body">
+          
+          <section class="story-section reveal">
   <div class="section-subtitle">Apertura</div>
   <h2 class="section-title">Propósito o fachada: el dilema de las empresas que prometen cambiar Colombia</h2>
 
@@ -206,3 +1019,72 @@
     </div>
   </div>
 </section>
+        </div>
+
+
+        </div>
+      </article>
+
+      <aside class="sidebar reveal">
+        <div class="sidebar-card">
+          <h3>En esta publicación</h3>
+          <ul>
+            <li>Qué prometen las empresas con propósito.</li>
+            <li>Qué cambia realmente con el modelo BIC.</li>
+            <li>Por qué el desarrollo humano es la prueba decisiva.</li>
+            <li>Qué revela la brecha entre discurso y evidencia.</li>
+            <li>Por qué más empresas registradas no garantizan más impacto.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Hipervínculos sugeridos</h3>
+          <ul>
+            <li><a href="#" target="_blank">Ley 1901 de 2018</a></li>
+            <li><a href="#" target="_blank">Decreto 2046 de 2019</a></li>
+            <li><a href="#" target="_blank">Sociedades BIC</a></li>
+            <li><a href="#" target="_blank">Confecámaras</a></li>
+            <li><a href="#" target="_blank">Superintendencia de Sociedades</a></li>
+            <li><a href="#" target="_blank">Greenwashing</a></li>
+            <li><a href="#" target="_blank">Bancolombia sostenibilidad</a></li>
+            <li><a href="#" target="_blank">Inclusión financiera</a></li>
+            <li><a href="#" target="_blank">Magia Salvaje SAS BIC</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Texto breve para el PDF de entrega</h3>
+          <p style="font-size:.98rem; line-height:1.7; margin:0;">
+            Este ensayo multimedia examina críticamente el modelo de empresas con propósito en Colombia y analiza si su impacto social, económico y ambiental es auténtico o si, en algunos casos, funciona más como estrategia reputacional. A partir del referente de pensamiento sobre organizaciones con propósito, gerencia humanista y desarrollo humano, se contrasta la promesa del modelo BIC con evidencia normativa y datos del contexto colombiano.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = progress + '%';
+    }
+
+    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('load', updateProgress);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
